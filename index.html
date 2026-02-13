@@ -273,17 +273,17 @@ function init(){
 // WORLD
 function buildWorld(){
   var geo=new THREE.PlaneGeometry(80,ZL);
-  var g1=new THREE.Mesh(geo.clone(),new THREE.MeshLambertMaterial({color:0x2d4a1a}));
+  var g1=new THREE.Mesh(geo.clone(),new THREE.MeshBasicMaterial({color:0x1a3310}));
   g1.rotation.x=-Math.PI/2;g1.position.set(0,-0.01,-ZL/2);scene.add(g1);
-  var g2=new THREE.Mesh(geo.clone(),new THREE.MeshLambertMaterial({color:0x8899aa}));
+  var g2=new THREE.Mesh(geo.clone(),new THREE.MeshBasicMaterial({color:0x667788}));
   g2.rotation.x=-Math.PI/2;g2.position.set(0,-0.01,-ZL*1.5);scene.add(g2);
-  var g3=new THREE.Mesh(geo.clone(),new THREE.MeshLambertMaterial({color:0x444444}));
+  var g3=new THREE.Mesh(geo.clone(),new THREE.MeshBasicMaterial({color:0x333338}));
   g3.rotation.x=-Math.PI/2;g3.position.set(0,-0.01,-ZL*2.5);scene.add(g3);
 
   // FOREST
-  var tMat=new THREE.MeshLambertMaterial({color:0x5c4033});
-  var lMat=new THREE.MeshLambertMaterial({color:0x2d5a1e});
-  var dlMat=new THREE.MeshLambertMaterial({color:0x4a3520});
+  var tMat=new THREE.MeshBasicMaterial({color:0x5c4033});
+  var lMat=new THREE.MeshBasicMaterial({color:0x2d6a1e});
+  var dlMat=new THREE.MeshBasicMaterial({color:0x5a4530});
   for(var i=0;i<90;i++){
     var x=(Math.random()-0.5)*70,z=-Math.random()*ZL;
     if(Math.abs(x)<6)continue;
@@ -294,7 +294,7 @@ function buildWorld(){
     var leaf=new THREE.Mesh(new THREE.SphereGeometry(ls,5,4),Math.random()>0.3?lMat:dlMat);
     leaf.position.set(x,h+ls*0.4,z);scene.add(leaf);
   }
-  var logM=new THREE.MeshLambertMaterial({color:0x4a3520});
+  var logM=new THREE.MeshBasicMaterial({color:0x5a4530});
   for(var i=0;i<8;i++){
     var log=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.4,3+Math.random()*3,5),logM);
     log.rotation.z=Math.PI/2;log.rotation.y=Math.random()*Math.PI;
@@ -305,14 +305,14 @@ function buildWorld(){
   var gl=new THREE.PointLight(0xff3300,1.5,80);gl.position.set(0,6,-ZL*0.5);scene.add(gl);
 
   // SNOW
-  var deadM=new THREE.MeshLambertMaterial({color:0x555544});
+  var deadM=new THREE.MeshBasicMaterial({color:0x666655});
   for(var i=0;i<25;i++){
     var x=(Math.random()-0.5)*70,z=-ZL-Math.random()*ZL;
     if(Math.abs(x)<5)continue;
     var h=3+Math.random()*4;
     scene.add(new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.25,h,5),deadM)).position.set(x,h/2,z);
   }
-  var rkM=new THREE.MeshLambertMaterial({color:0x556677});
+  var rkM=new THREE.MeshBasicMaterial({color:0x667788});
   for(var i=0;i<15;i++){
     var r=new THREE.Mesh(new THREE.DodecahedronGeometry(0.5+Math.random()*1.5,0),rkM);
     r.position.set((Math.random()-0.5)*55,Math.random()*0.5,-ZL-Math.random()*ZL);
@@ -322,8 +322,8 @@ function buildWorld(){
   var sl=new THREE.PointLight(0x4488cc,0.4,60);sl.position.set(0,10,-ZL*1.5);scene.add(sl);
 
   // BUNKER ZONE
-  var cM=new THREE.MeshLambertMaterial({color:0x777777});
-  var dkM=new THREE.MeshLambertMaterial({color:0x555555});
+  var cM=new THREE.MeshBasicMaterial({color:0x777777});
+  var dkM=new THREE.MeshBasicMaterial({color:0x555555});
   for(var i=0;i<18;i++){
     var b=new THREE.Mesh(new THREE.BoxGeometry(2+Math.random()*2,1.2,0.6),cM);
     b.position.set((Math.random()-0.5)*35,0.6,-ZL*2-Math.random()*(ZL-30));
@@ -336,8 +336,8 @@ function buildWorld(){
     scene.add(bld);
   }
   // BUNKER DOOR
-  scene.add(new THREE.Mesh(new THREE.BoxGeometry(6,4,2),new THREE.MeshLambertMaterial({color:0x445566}))).position.set(0,2,-TL+5);
-  scene.add(new THREE.Mesh(new THREE.BoxGeometry(7,0.5,2.5),new THREE.MeshLambertMaterial({color:0x888800}))).position.set(0,4.25,-TL+5);
+  scene.add(new THREE.Mesh(new THREE.BoxGeometry(6,4,2),new THREE.MeshBasicMaterial({color:0x445566}))).position.set(0,2,-TL+5);
+  scene.add(new THREE.Mesh(new THREE.BoxGeometry(7,0.5,2.5),new THREE.MeshBasicMaterial({color:0x888800}))).position.set(0,4.25,-TL+5);
   scene.add(new THREE.Mesh(new THREE.BoxGeometry(3,0.4,0.1),new THREE.MeshBasicMaterial({color:0xffff00}))).position.set(0,5,-TL+6.1);
   var bl=new THREE.PointLight(0xffff44,1.2,30);bl.position.set(0,5,-TL+8);scene.add(bl);
   var wl=new THREE.PointLight(0xff0000,1.5,20);wl.position.set(3,4,-TL+8);scene.add(wl);
@@ -354,7 +354,7 @@ function buildWorld(){
 }
 
 function buildWreck(x,z,fire){
-  var m=new THREE.MeshLambertMaterial({color:0x555560});
+  var m=new THREE.MeshBasicMaterial({color:0x444450});
   var b=new THREE.Mesh(new THREE.BoxGeometry(2.5,1.2,4),m);
   b.position.set(x,0.6,z);b.rotation.y=Math.random()*Math.PI;b.rotation.z=(Math.random()-0.5)*0.3;scene.add(b);
   var t=new THREE.Mesh(new THREE.BoxGeometry(2,0.8,2.5),m);t.position.set(x,1.5,z);t.rotation.y=b.rotation.y;scene.add(t);
@@ -373,11 +373,11 @@ function buildSquad(){
   var hG=new THREE.SphereGeometry(0.2,6,5);
   var lG=new THREE.CylinderGeometry(0.08,0.1,0.6,4);
   var gG=new THREE.BoxGeometry(0.08,0.08,0.6);
-  var skM=new THREE.MeshLambertMaterial({color:0xcc9966});
-  var gnM=new THREE.MeshLambertMaterial({color:0x222222});
+  var skM=new THREE.MeshBasicMaterial({color:0xcc9966});
+  var gnM=new THREE.MeshBasicMaterial({color:0x333333});
   for(var i=0;i<squad.length;i++){
     var s=squad[i],gr=new THREE.Group();
-    var bM=new THREE.MeshLambertMaterial({color:s.color});
+    var bM=new THREE.MeshBasicMaterial({color:s.color});
     var body=new THREE.Mesh(bG.clone(),bM);body.position.y=1.2;gr.add(body);
     var head=new THREE.Mesh(hG.clone(),skM);head.position.y=2;gr.add(head);
     var ll=new THREE.Mesh(lG.clone(),bM);ll.position.set(-0.12,0.3,0);gr.add(ll);
@@ -394,8 +394,8 @@ function buildSquad(){
 // ENEMIES
 function mkEnemy(type,x,y,z){
   var gr=new THREE.Group();
-  var mM=new THREE.MeshLambertMaterial({color:0x555566});
-  var dM=new THREE.MeshLambertMaterial({color:0x333344});
+  var mM=new THREE.MeshBasicMaterial({color:0x666677});
+  var dM=new THREE.MeshBasicMaterial({color:0x444455});
   var eM=new THREE.MeshBasicMaterial({color:0xff0000});
   var hp,spd,dmg,ar,sz;
   if(type==='stumper'){
@@ -463,7 +463,7 @@ function mkParts(pos,cnt,col,spd,life,sz){
 function mkDebris(pos,cnt){
   for(var i=0;i<cnt;i++){
     var s=0.05+Math.random()*0.15;
-    var m=new THREE.Mesh(new THREE.BoxGeometry(s,s,s*2),new THREE.MeshLambertMaterial({color:0x555566}));
+    var m=new THREE.Mesh(new THREE.BoxGeometry(s,s,s*2),new THREE.MeshBasicMaterial({color:0x555566}));
     m.position.copy(pos);m.position.y+=Math.random()*0.5;
     m.userData={vel:new THREE.Vector3((Math.random()-0.5)*8,3+Math.random()*5,(Math.random()-0.5)*8),life:2.5,ml:2.5,debris:true,flame:false};
     scene.add(m);particles.push(m);
