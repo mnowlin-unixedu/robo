@@ -310,7 +310,7 @@ function buildWorld(){
     var x=(Math.random()-0.5)*70,z=-ZL-Math.random()*ZL;
     if(Math.abs(x)<5)continue;
     var h=3+Math.random()*4;
-    scene.add(new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.25,h,5),deadM)).position.set(x,h/2,z);
+    var dtm=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.25,h,5),deadM);dtm.position.set(x,h/2,z);scene.add(dtm);
   }
   var rkM=new THREE.MeshBasicMaterial({color:0x667788});
   for(var i=0;i<15;i++){
@@ -336,9 +336,9 @@ function buildWorld(){
     scene.add(bld);
   }
   // BUNKER DOOR
-  scene.add(new THREE.Mesh(new THREE.BoxGeometry(6,4,2),new THREE.MeshBasicMaterial({color:0x445566}))).position.set(0,2,-TL+5);
-  scene.add(new THREE.Mesh(new THREE.BoxGeometry(7,0.5,2.5),new THREE.MeshBasicMaterial({color:0x888800}))).position.set(0,4.25,-TL+5);
-  scene.add(new THREE.Mesh(new THREE.BoxGeometry(3,0.4,0.1),new THREE.MeshBasicMaterial({color:0xffff00}))).position.set(0,5,-TL+6.1);
+  var door=new THREE.Mesh(new THREE.BoxGeometry(6,4,2),new THREE.MeshBasicMaterial({color:0x445566}));door.position.set(0,2,-TL+5);scene.add(door);
+  var frame=new THREE.Mesh(new THREE.BoxGeometry(7,0.5,2.5),new THREE.MeshBasicMaterial({color:0x888800}));frame.position.set(0,4.25,-TL+5);scene.add(frame);
+  var bsign=new THREE.Mesh(new THREE.BoxGeometry(3,0.4,0.1),new THREE.MeshBasicMaterial({color:0xffff00}));bsign.position.set(0,5,-TL+6.1);scene.add(bsign);
   var bl=new THREE.PointLight(0xffff44,1.2,30);bl.position.set(0,5,-TL+8);scene.add(bl);
   var wl=new THREE.PointLight(0xff0000,1.5,20);wl.position.set(3,4,-TL+8);scene.add(wl);
   fireLights.push({light:wl,type:'blink'});
